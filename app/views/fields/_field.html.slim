@@ -1,0 +1,10 @@
+tr
+  td
+    = field.name
+  td
+    =' link_to "Show", field_path(field)
+    '/
+    = link_to "Delete", field, method: :delete,
+            data: { confirm: "You sure?" }
+  td
+    == field.shape.area

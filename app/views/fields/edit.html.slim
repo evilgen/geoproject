@@ -1,3 +1,7 @@
-h1 Fields#edit
-h2
-  = @field.name
+h2 Edit field #{@field.name}
+.row
+  = form_for @field, html: { class: "form-horizontal" } do |f|
+    = render 'inputs', f: f
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit "Save changes", class: "btn btn-default btn-primary"

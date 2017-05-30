@@ -1,26 +1,16 @@
-.container
-  h1
-    | List of fields
-  .row
-    .col-md-12
-      table.table.table-hover
-        thead
-          tr
-            th
-              | #
-            th
-              | Name
-            th
-              | Area
-        tbody
-          - @fields.each do |field|
-            tr
-              th[scope="row"]
-                == field.id
-              td
-                == field.name + " / "
-                = link_to "Show", field_path(field)
-              td
-                == field.shape.area
-              td
-
+h1
+  | List of fields
+.row
+  .col-md-12
+    table.table.table-hover
+      thead
+        tr
+          th
+            | Name
+          th
+          th
+            | Area
+      tbody
+        = render @fields
+    = will_paginate
+    = link_to "Create new", new_field_path

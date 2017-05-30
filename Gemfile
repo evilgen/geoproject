@@ -32,6 +32,7 @@ gem 'pg'
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'autoprefixer-rails'
+gem 'will_paginate'
 
 # PostGIS ActiveRecord Adapter
 gem 'activerecord-postgis-adapter'

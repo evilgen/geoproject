@@ -6,4 +6,12 @@ class Field < ApplicationRecord
     # But use a geographic implementation for point columns.
     config.register(RGeo::Geographic.spherical_factory(srid: 4326), geo_type: "multi_polygon")
   end
+
+  def shape_text
+    RGeo::GeoJSON.encode(shape).to_json
+  end
+
+  def shape_text=(text)
+    self.shape = RGeo::GeoJSON.decode(text, json_parser: :json)
+  end
 end

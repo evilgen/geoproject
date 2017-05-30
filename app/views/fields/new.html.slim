@@ -1,2 +1,7 @@
-h1 Fields#new
-p Find me in app/views/fields/new.html.slim
+h2 Creat new field
+.row
+  = form_for @field, html: { class: "form-horizontal" } do |f|
+    = render 'inputs', f: f
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit "Create new", class: "btn btn-large btn-primary"
