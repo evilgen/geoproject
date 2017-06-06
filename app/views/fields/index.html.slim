@@ -17,6 +17,7 @@ h1
 
   javascript:
     document.addEventListener('DOMContentLoaded', function () {
+
       //var map = L.map('mapid').setView([39.743, -105.004], 15);
       var map = L.map('mapid').setView([51.505, -0.09], 13);
 
@@ -29,7 +30,6 @@ h1
       //     accessToken: 'pk.eyJ1IjoiZXZpbGdlbiIsImEiOiJjajM3c3I4M3MwMXZjMzJxYXZ3Zm92cWk1In0.cOvWBp6j-TTQeYgKUT9qnA'
       // }).addTo(map);
 
-
       mapLink ='<a href="http://openstreetmap.org">OpenStreetMap</a>';
       L.tileLayer(
               'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -37,11 +37,11 @@ h1
                 maxZoom: 18
               }).addTo(map);
 
-
       var textMultipoligons = gon.collection;
 
       textMultipoligons.forEach(function(item, i){
         geojsonMultipoligons = JSON.parse(item);
         geoJsonLayer = L.geoJSON(geojsonMultipoligons).addTo(map);
       });
+
     });

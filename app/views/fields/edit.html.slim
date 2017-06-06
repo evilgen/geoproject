@@ -10,6 +10,7 @@ h2
 
   javascript:
     document.addEventListener('DOMContentLoaded', function () {
+
       //var map = L.map('mapid').setView([39.743, -105.004], 15);
       var map = L.map('mapid').setView([51.505, -0.09], 10);
 
@@ -21,27 +22,15 @@ h2
       // }).addTo(map);
 
 
-      mapLink =
-              '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
       L.tileLayer(
               'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; ' + mapLink + ' Contributors',
                 maxZoom: 18
               }).addTo(map);
 
-      // options for leaflet.pm controls
-      var draw_options = {
-        position: 'topleft', // toolbar position, options are 'topleft', 'topright', 'bottomleft', 'bottomright'
-        drawMarker: false,  // adds button to draw markers
-        drawPolygon: true,  // adds button to draw a polygon
-        drawCircle: false,  // adds button to draw a circle
-        drawPolyline: false,  // adds button to draw a polyline
-        editPolygon: true,  // adds button to toggle global edit mode
-        deleteLayer: false   // adds a button to delete layers
-      };
-
       // add leaflet.pm controls to the map
-      map.pm.addControls(draw_options);
+      map.pm.addControls(edit_options);
 
       var geojsonMultipoligons = {
         'type': 'MultiPolygon',
@@ -66,7 +55,7 @@ h2
         }
       }
 
-      $("form").submit(function (event) {
+      $("form").submit(function () {
         geojsonMultipoligons.coordinates = [];
         var i = 0;
         map.eachLayer(function (layer) {
@@ -76,7 +65,9 @@ h2
             geojsonMultipoligons.coordinates.push(shape_string);
           }
         });
+
         $('#field_shape_text').val(JSON.stringify(geojsonMultipoligons));
+
       });
 
     });

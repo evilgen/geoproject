@@ -18,4 +18,25 @@
 //= require_tree .
 
 
+// options for leaflet.pm controls
+
+var edit_options = {
+    position: 'topleft', // toolbar position, options are 'topleft', 'topright', 'bottomleft', 'bottomright'
+    drawMarker: false,  // adds button to draw markers
+    drawPolygon: true,  // adds button to draw a polygon
+    drawCircle: false,  // adds button to draw a circle
+    drawPolyline: false,  // adds button to draw a polyline
+    editPolygon: true,  // adds button to toggle global edit mode
+    deleteLayer: true   // adds a button to delete layers
+};
+var draw_options = {
+    position: 'topleft', // toolbar position, options are 'topleft', 'topright', 'bottomleft', 'bottomright'
+    drawMarker: false,  // adds button to draw markers
+    drawPolygon: true,  // adds button to draw a polygon
+    drawCircle: false,  // adds button to draw a circle
+    drawPolyline: false,  // adds button to draw a polyline
+    editPolygon: false,  // adds button to toggle global edit mode
+    deleteLayer: true   // adds a button to delete layers
+};
+
 

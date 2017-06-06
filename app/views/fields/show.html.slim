@@ -11,8 +11,6 @@ h1
       //var map = L.map('mapid').setView([39.743, -105.004], 15);
       var map = L.map('mapid').setView([51.505, -0.09], 13);
 
-
-
       //My own MapBox tilelayer
 
       // L.tileLayer('https://api.mapbox.com/styles/v1/evilgen/cj3bmyfbk00032sl7za1ixszc/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
@@ -22,9 +20,7 @@ h1
       //     accessToken: 'pk.eyJ1IjoiZXZpbGdlbiIsImEiOiJjajM3c3I4M3MwMXZjMzJxYXZ3Zm92cWk1In0.cOvWBp6j-TTQeYgKUT9qnA'
       // }).addTo(map);
 
-
-      mapLink =
-              '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
       L.tileLayer(
               'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; ' + mapLink + ' Contributors',
@@ -35,4 +31,5 @@ h1
       geojsonMultipoligons = JSON.parse(textMultipoligons);
       geoJsonLayer = L.geoJSON(geojsonMultipoligons).addTo(map);
       map.fitBounds(geoJsonLayer.getBounds());
+
     });
