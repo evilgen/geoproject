@@ -52,6 +52,4 @@ class FieldsController < ApplicationController
     params.require(:field).permit(:name, :shape_text)
   end
 
-
-
 end

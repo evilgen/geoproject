@@ -2,9 +2,9 @@ tr
   td
     = field.name
   td
+    == "#{field.shape.area} ha."
+  td
     =' link_to "Show", field_path(field)
     '/
     = link_to "Delete", field, method: :delete,
-            data: { confirm: "You sure?" }
-  td
-    == "#{field.shape.area} ha."
+            data: {confirm: "You sure?"}
