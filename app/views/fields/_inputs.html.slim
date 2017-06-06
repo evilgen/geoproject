@@ -2,7 +2,4 @@
   = f.label :name, class: "col-sm-2 control-label"
   .col-sm-10
     = f.text_field :name, class: "form-control"
-.form-group
-  = f.label :shape, class: "col-sm-2 control-label"
-  .col-sm-10
-    = f.text_area :shape_text, class: "form-control", rows: "3"
+= f.hidden_field :shape_text

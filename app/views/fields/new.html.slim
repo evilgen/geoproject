@@ -1,7 +1,68 @@
 h2 Creat new field
+#mapid
 .row
   = form_for @field, html: { class: "form-horizontal" } do |f|
     = render 'inputs', f: f
     .form-group
       .col-sm-offset-2.col-sm-10
         = f.submit "Create new", class: "btn btn-large btn-primary"
+
+  javascript:
+    document.addEventListener('DOMContentLoaded', function () {
+      //var map = L.map('mapid').setView([39.743, -105.004], 15);
+      var map = L.map('mapid').setView([51.505, -0.09], 13);
+
+      // L.tileLayer('https://api.mapbox.com/styles/v1/evilgen/cj3bmyfbk00032sl7za1ixszc/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
+      //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      //     maxZoom: 18,
+      //     // id: 'evilgen/cj3bmyfbk00032sl7za1ixszc/tiles/256',
+      //     accessToken: 'pk.eyJ1IjoiZXZpbGdlbiIsImEiOiJjajM3c3I4M3MwMXZjMzJxYXZ3Zm92cWk1In0.cOvWBp6j-TTQeYgKUT9qnA'
+      // }).addTo(map);
+
+
+      mapLink =
+              '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      L.tileLayer(
+              'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; ' + mapLink + ' Contributors',
+                maxZoom: 18
+              }).addTo(map);
+
+      // options for leaflet.pm controls
+      var draw_options = {
+        position: 'topleft', // toolbar position, options are 'topleft', 'topright', 'bottomleft', 'bottomright'
+        drawMarker: false,  // adds button to draw markers
+        drawPolygon: true,  // adds button to draw a polygon
+        drawCircle: false,  // adds button to draw a circle
+        drawPolyline: false,  // adds button to draw a polyline
+        editPolygon: false,  // adds button to toggle global edit mode
+        deleteLayer: true   // adds a button to delete layers
+      };
+
+      // add leaflet.pm controls to the map
+      map.pm.addControls(draw_options);
+
+
+
+      var geojsonMultipoligons = {
+                        'type': 'MultiPolygon',
+                        'coordinates': []};
+
+      map.on('pm:create', function (e) {
+        geojsonMultipoligons.coordinates = [];
+        var i = 0;
+        map.eachLayer(function (layer) {
+          if (layer.hasOwnProperty('_latlngs')) {
+            shape = layer.toGeoJSON();
+            shape_string = shape.geometry["coordinates"];
+            geojsonMultipoligons.coordinates.push(shape_string);
+          }
+        });
+        $('#field_shape_text').val(JSON.stringify(geojsonMultipoligons));
+
+        
+        
+        
+      });
+
+    });

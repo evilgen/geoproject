@@ -1,5 +1,6 @@
 h1
   | List of fields
+#mapid
 .row
   .col-md-12
     table.table.table-hover
@@ -13,4 +14,34 @@ h1
       tbody
         = render @fields
     = will_paginate
-    = link_to "Create new", new_field_path
+
+  javascript:
+    document.addEventListener('DOMContentLoaded', function () {
+      //var map = L.map('mapid').setView([39.743, -105.004], 15);
+      var map = L.map('mapid').setView([51.505, -0.09], 13);
+
+      //My own MapBox tilelayer
+
+      // L.tileLayer('https://api.mapbox.com/styles/v1/evilgen/cj3bmyfbk00032sl7za1ixszc/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
+      //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      //     maxZoom: 18,
+      //     // id: 'evilgen/cj3bmyfbk00032sl7za1ixszc/tiles/256',
+      //     accessToken: 'pk.eyJ1IjoiZXZpbGdlbiIsImEiOiJjajM3c3I4M3MwMXZjMzJxYXZ3Zm92cWk1In0.cOvWBp6j-TTQeYgKUT9qnA'
+      // }).addTo(map);
+
+
+      mapLink ='<a href="http://openstreetmap.org">OpenStreetMap</a>';
+      L.tileLayer(
+              'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; ' + mapLink + ' Contributors',
+                maxZoom: 18
+              }).addTo(map);
+
+
+      var textMultipoligons = gon.collection;
+
+      textMultipoligons.forEach(function(item, i){
+        geojsonMultipoligons = JSON.parse(item);
+        geoJsonLayer = L.geoJSON(geojsonMultipoligons).addTo(map);
+      });
+    });

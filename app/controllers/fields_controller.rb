@@ -4,18 +4,21 @@ class FieldsController < ApplicationController
   end
 
   def index
-    # @fields = Field.all
-    @fields = Field.paginate(page: params[:page], :per_page => 20).order('created_at ASC')
+    @fields = Field.paginate(page: params[:page], :per_page => 5).order('created_at DESC')
+    collection = @fields.select("shape")
+    gon.collection = []
+    collection.each{|item| gon.collection << (item.shape_text)}
   end
 
   def show
     @field = Field.find(params[:id])
+    gon.shape = @field.shape_text
   end
 
   def create
     @field = Field.new(field_params)
     if @field.save
-      # flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Shape create successfully!"
       redirect_to @field
     else
       render 'new'
@@ -29,7 +32,7 @@ class FieldsController < ApplicationController
   def update
     @field = Field.find(params[:id])
     if @field.update_attributes(field_params)
-      # flash[:success] = "Profile updated"
+      flash[:success] = "Shape updated"
       redirect_to @field
     else
       render 'edit'
@@ -39,7 +42,7 @@ class FieldsController < ApplicationController
   def destroy
     @field = Field.find(params[:id])
     @field.destroy
-    # flash[:success] = "User deleted."
+    flash[:success] = "Shape has been deleted."
     redirect_to fields_url
   end
 

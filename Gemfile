@@ -33,6 +33,7 @@ gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'autoprefixer-rails'
 gem 'will_paginate'
+gem 'gon'
 
 # PostGIS ActiveRecord Adapter
 gem 'activerecord-postgis-adapter'
@@ -41,6 +42,9 @@ gem 'activerecord-postgis-adapter'
 gem 'rgeo-geojson'
 
 gem 'rgeo', require: false
+
+# leaflet-rails map
+gem 'leaflet-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
